@@ -22,7 +22,7 @@ export default function App() {
         <Sidebar />
         <div className="app__main">
           <header className="app__header">
-            <h1 className="app__title">진로중학교 학생 진로 성장을 위한 회의 자료</h1>
+            <h1 className="app__title">진로중학교 학생 진로 설계 자료</h1>
             <p className="app__subtitle">3학년 3반 · 학생 한 명씩 함께 보며 논의합니다</p>
           </header>
           <main className="app__content">
