@@ -45,9 +45,17 @@ npm run preview  # 빌드 결과 확인
 
 ## 배포
 
-정적 빌드라 어디에나 올릴 수 있지만, SPA 라우팅 때문에 주의할 점이 하나 있습니다. `/students/s03` 같은 주소로 **직접 접속하거나 새로고침**하면 호스트가 404를 낼 수 있습니다.
+**현재 배포 주소: https://leeee-dotcom.github.io/class/**
 
-- **Vercel** — `vercel.json` 의 rewrite 설정이 이미 들어 있어 그대로 배포하면 됩니다
-- **GitHub Pages** — rewrite를 지원하지 않으므로, `src/main.tsx` 의 `BrowserRouter` 를 `HashRouter` 로 바꾸거나 `404.html` 우회를 써야 합니다
+정적 빌드라 어디에나 올릴 수 있지만, SPA 라우팅 때문에 주의할 점이 하나 있습니다. `/students/s02` 같은 주소로 **직접 접속하거나 새로고침**하면 호스트가 404를 낼 수 있습니다. 두 경로 모두 준비해 두었습니다.
+
+- **GitHub Pages** (현재 쓰는 방식)
+  ```bash
+  npm run build:pages   # --base=/class/ 로 빌드 + 404.html, .nojekyll 생성
+  ```
+  결과물(`dist/`)을 `gh-pages` 브랜치에 올리면 됩니다. Pages는 rewrite가 없어서 없는 경로에 `404.html` 을 돌려주는데, 이것을 `index.html` 과 같은 내용으로 두면 앱이 뜨고 라우터가 주소를 읽어 올바른 화면을 그립니다. **응답 코드만 404이고 화면은 정상**입니다 (검색 노출은 `noindex` 로 막아두었으므로 문제되지 않습니다).
+- **Vercel** — `npm run build` 로 루트 기준 빌드. `vercel.json` 의 rewrite가 딥링크를 처리하므로 응답 코드까지 정상 200입니다
+
+`BrowserRouter` 의 `basename` 은 `import.meta.env.BASE_URL` 을 따르므로 두 방식에서 코드는 동일합니다.
 
 검색엔진 노출은 `index.html` 의 `noindex` 로 막아두었습니다.
