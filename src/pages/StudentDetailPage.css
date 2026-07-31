@@ -1,0 +1,176 @@
+.detail {
+  display: grid;
+  gap: var(--space-sm);
+  min-height: 0;
+}
+
+/* 머리말: 얼굴 · 이름과 학번 · 요약 타일을 한 줄에 놓아 세로를 아낀다 */
+.detail__head {
+  display: grid;
+  grid-template-columns: auto minmax(10rem, 0.5fr) minmax(0, 3.4fr);
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+}
+
+.detail__portrait {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-xs);
+}
+
+.detail__portrait-note {
+  margin: 0;
+  max-width: 9rem;
+  color: var(--ink-48);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.detail__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -0.28px;
+}
+
+.detail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-lg);
+  margin: var(--space-xs) 0 var(--space-sm);
+}
+
+.detail__meta dt {
+  color: var(--ink-48);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+}
+
+.detail__meta dd {
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 600;
+}
+
+.detail__tiles {
+  display: grid;
+  grid-template-columns: 1.15fr 1.15fr 0.85fr 0.85fr;
+  align-items: start;
+  gap: var(--space-sm);
+}
+
+/* 성적 · 성격/교우 · 진로 · 고등학교 네 칸. 표가 잘리지 않도록 성적 칸을 가장 넓게 잡는다 */
+.detail__columns {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr 1.15fr 0.8fr;
+  gap: var(--space-sm);
+  align-items: start;
+  min-height: 0;
+}
+
+.detail__column {
+  display: grid;
+  gap: var(--space-sm);
+  min-height: 0;
+}
+
+.detail__text {
+  margin: 0;
+  font-size: var(--fs-body);
+}
+
+/* 한 카드 안에서 진로 다음에 오는 진로검사 구분선 */
+.detail__subhead {
+  margin: var(--space-md) 0 var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--divider);
+  color: var(--ink-48);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caption);
+}
+
+.detail__schools {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.detail-status {
+  padding: var(--space-xl);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  color: var(--ink-48);
+}
+
+@media (max-width: 1600px) {
+  .detail__columns {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+
+  /* 세 칸으로 줄면 고등학교 칸이 성격 칸 아래로 내려간다 */
+  .detail__column--grades {
+    grid-row: span 2;
+  }
+}
+
+@media (max-width: 1240px) {
+  .detail__columns {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .detail__column--grades {
+    grid-row: auto;
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1068px) {
+  .detail__head {
+    grid-template-columns: auto 1fr;
+  }
+
+  .detail__tiles {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  }
+
+  .detail__columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .detail__head {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+}
+
+/* 전자칠판 모드: 세 단이 화면 높이를 채우고, 넘치면 카드 안에서만 스크롤한다 */
+@media (min-width: 1200px) and (min-height: 680px) {
+  .detail {
+    grid-template-rows: auto minmax(0, 1fr);
+    height: 100%;
+  }
+
+  .detail__columns {
+    min-height: 0;
+    height: 100%;
+    align-items: stretch;
+  }
+
+  .detail__column {
+    grid-auto-rows: minmax(0, auto);
+    min-height: 0;
+  }
+}

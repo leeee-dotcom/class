@@ -1,0 +1,39 @@
+/* Apple 규칙: 카드에 그림자를 쓰지 않는다. 깊이는 1px 헤어라인과 여백으로 만든다. */
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: var(--space-lg);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+}
+
+.card__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-xxs) var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.card__title {
+  margin: 0;
+  font-size: var(--fs-tagline);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+}
+
+.card__note {
+  margin: 0;
+  color: var(--ink-48);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-caption);
+}
+
+/* 전자칠판에서 넘치는 내용은 페이지가 아니라 카드 안에서만 스크롤한다 */
+.card__body {
+  min-height: 0;
+  overflow: auto;
+}

@@ -1,0 +1,16 @@
+.home {
+  display: grid;
+  gap: var(--space-md);
+  align-content: start;
+}
+
+.home__tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--space-sm);
+}
+
+.home__status {
+  margin: 0;
+  color: var(--ink-48);
+}

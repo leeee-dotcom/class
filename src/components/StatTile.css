@@ -1,0 +1,64 @@
+/* 파스텔 배경 대신 Apple의 pearl 표면 + 헤어라인. 색은 숫자와 기호에만 얹는다. */
+.stat-tile {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--pearl);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-md);
+}
+
+.stat-tile__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--canvas);
+  border: 1px solid var(--divider);
+  color: var(--ink-48);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+}
+
+.stat-tile__body {
+  min-width: 0;
+}
+
+.stat-tile__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-lg);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-display);
+}
+
+.stat-tile__label {
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  color: var(--ink-80);
+  letter-spacing: var(--tracking-caption);
+}
+
+.stat-tile__detail {
+  color: var(--ink-48);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+}
+
+.stat-tile--up .stat-tile__icon,
+.stat-tile--up .stat-tile__value {
+  color: var(--up);
+}
+
+.stat-tile--down .stat-tile__icon,
+.stat-tile--down .stat-tile__value {
+  color: var(--down);
+}
+
+.stat-tile--mark .stat-tile__icon,
+.stat-tile--mark .stat-tile__value {
+  color: var(--ink);
+}

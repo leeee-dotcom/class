@@ -1,0 +1,38 @@
+.career-test-list {
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.career-test {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--pearl);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-md);
+}
+
+.career-test__name {
+  font-weight: 600;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-caption);
+}
+
+.career-test__type {
+  color: var(--action);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caption);
+}
+
+.career-test__empty {
+  margin: 0;
+  color: var(--ink-48);
+  font-size: var(--fs-caption);
+}

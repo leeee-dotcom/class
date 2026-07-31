@@ -1,6 +1,83 @@
 .app {
-  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  gap: var(--space-md);
+  align-items: start;
+  padding: var(--space-md);
+}
+
+.app__main {
+  display: grid;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.app__header {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-xxs) var(--space-md);
+  padding: 0 var(--space-xs);
+}
+
+.app__title {
+  margin: 0;
+  font-size: var(--fs-display-md);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+}
+
+.app__subtitle {
+  margin: 0;
+  color: var(--ink-48);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-caption);
+}
+
+.app__notfound {
+  padding: var(--space-xl);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 833px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
+ * 전자칠판 모드. 화면이 충분히 크면 페이지 전체가 한 화면에 들어가고
+ * 스크롤은 카드 안에서만 일어난다. 작은 화면에서는 평소처럼 아래로 흐른다.
+ */
+@media (min-width: 1200px) and (min-height: 680px) {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  .shell {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .app {
+    min-height: 0;
+    height: 100%;
+    align-items: stretch;
+  }
+
+  .app__main {
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .app__content {
+    min-height: 0;
+    height: 100%;
+  }
 }

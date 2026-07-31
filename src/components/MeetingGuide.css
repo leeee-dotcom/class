@@ -1,0 +1,29 @@
+.meeting-guide__steps {
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.meeting-guide__steps li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  counter-increment: step;
+}
+
+.meeting-guide__steps li::before {
+  content: counter(step);
+  flex: none;
+  width: 1.9rem;
+  height: 1.9rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--hairline);
+  color: var(--ink-48);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+}

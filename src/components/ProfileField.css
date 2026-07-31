@@ -1,0 +1,36 @@
+/* 3단 배치에서는 칸이 좁아 라벨을 옆에 두면 본문이 눌린다. 라벨을 위에 얹는다. */
+.profile-field {
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.profile-field:first-child {
+  padding-top: 0;
+}
+
+.profile-field:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.profile-field__label {
+  color: var(--ink-48);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caption);
+}
+
+.profile-field__body {
+  margin-top: var(--space-xxs);
+  font-size: var(--fs-body);
+}
+
+/* 강점은 회의에서 가장 먼저 짚는 항목이라 붉은 글씨로 구분한다 */
+.profile-field--highlight .profile-field__label,
+.profile-field--highlight .profile-field__body {
+  color: var(--down);
+}
+
+.profile-field--highlight .profile-field__body {
+  font-weight: 600;
+}

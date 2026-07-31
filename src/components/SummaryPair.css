@@ -1,0 +1,51 @@
+.summary-pair {
+  padding: var(--space-md);
+  background: var(--pearl);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-md);
+}
+
+.summary-pair__label {
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  color: var(--ink-80);
+  letter-spacing: var(--tracking-caption);
+}
+
+.summary-pair__rows {
+  display: grid;
+  gap: var(--space-xs);
+  margin: var(--space-xs) 0 0;
+}
+
+/* 라벨을 고정 폭으로 두어 희망과 추천의 본문이 같은 지점에서 시작하게 한다 */
+.summary-pair__row {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.summary-pair__row dt {
+  color: var(--ink-48);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+}
+
+.summary-pair__row dd {
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* 추천은 회의의 결론에 해당하므로 색으로 구분하고 왼쪽에 선을 둔다 */
+.summary-pair__row--recommended {
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--divider);
+}
+
+.summary-pair__row--recommended dt,
+.summary-pair__row--recommended dd {
+  color: var(--action);
+}

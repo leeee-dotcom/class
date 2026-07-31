@@ -1,32 +1,53 @@
-# React + TypeScript + Vite
+# 진로중학교 학생 진로 성장을 위한 회의 자료
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+교사 회의에서 학생을 한 명씩 함께 보며 논의하는 방식을 보여주는 **안내용 시연물**입니다. 실제 학생 관리 도구가 아닙니다.
 
-Currently, two official plugins are available:
+> **이 저장소의 학생 정보는 전부 가상입니다.** 실존 인물과 무관하며, 실제 학생 정보를 넣지 마세요.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 무엇을 보여주나
 
-## React Compiler
+- **왼쪽 사이드바** — 학생 명단 + 이름·번호 검색. 회의 중 학생만 바꿔 가며 봅니다
+- **첫 화면** — 회의 진행 순서 안내 + 반 전체 요약
+- **학생 화면** — 머리말에 얼굴·이름·학번과 요약 타일 넷(**진로 희망/추천**, **고등학교 희망/추천**, 잘하는 과목 3개, 약한 과목 3개). 회의의 논점은 늘 학생이 원하는 것과 우리가 권하는 것의 거리라서 둘을 한 칸에 붙여 놓았습니다. 그 아래 네 칸:
+  1. **성적** — 학기별 추이 꺾은선 + 학기별 성적표 (가장 넓은 칸)
+  2. **성격 · 교우관계**
+  3. **진로** — 강점(붉은 상자) → 흥미 → 적성 → 희망 진로 → 진로검사 결과 순
+  4. **고등학교** — 희망 고등학교와 추천 고등학교
+- 3학년 3반, 2학년 1학기 ~ 3학년 1학기 성적
+- 좌우 화살표 키로 다음 학생으로 넘어갑니다 — 회의 중 클릭 없이 진행하기 위한 것입니다
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+학생 데이터는 `src/data/students.ts` 에 **표본 5명**만 둡니다. 성적이 오른 학생, 떨어진 학생, 과목 편차가 큰 학생을 섞어 회의에서 나올 만한 경우를 덮습니다. 늘리려면 이 배열에만 추가하면 되고 화면은 그대로 동작합니다.
 
-## Expanding the Oxlint configuration
+학생 얼굴은 `src/components/Portrait.tsx` 가 이름 해시로 그리는 SVG 초상입니다. 광원·명암·눈동자 반사를 넣어 사진에 가깝게 그렸지만 **사진이 아니라 벡터로 그린 가상 인물**이며, 실존 인물 사진을 쓰지 않고 외부 이미지도 불러오지 않습니다. 같은 학생은 항상 같은 얼굴이 나옵니다. 진짜 인물 사진을 쓰려면 이미지를 `public/` 에 넣고 학생의 `photoUrl` 만 채우면 `Avatar` 가 그쪽을 씁니다 — 다만 실존 인물 사진은 초상권 문제가 있으니 사용 허가가 확인된 것만 쓰세요.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+회의실 프로젝터에서 뒷자리까지 읽히도록 글자 크기와 명도 대비를 키워 두었습니다. 관련 값은 전부 `src/styles/tokens.css` 에 있으니 화면이 작게 느껴지면 여기만 고치면 됩니다.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## 실행
+
+```bash
+npm install
+npm run dev      # 개발 서버
+npm test         # 테스트
+npm run build    # 타입체크 + 프로덕션 빌드
+npm run preview  # 빌드 결과 확인
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 실제 학생 데이터를 쓰고 싶어지면
+
+지금 데이터는 `src/data/students.ts` 안의 가상 값이고, 화면은 `src/data/studentRepo.ts` 를 통해서만 데이터를 읽습니다. 출처를 바꾸려면 이 파일 내부만 고치면 됩니다 (Supabase 클라이언트는 `src/lib/supabase.ts` 에 준비돼 있습니다).
+
+다만 실제 학생 정보를 넣기 전에 **반드시 먼저** 해야 할 일이 있습니다. 성적·성격·교우관계·진로검사 결과는 미성년자의 민감한 정보입니다.
+
+1. 이 저장소를 **비공개로 전환**한다 (현재 public입니다)
+2. 로그인을 붙여 아무나 볼 수 없게 한다
+3. Supabase에 **RLS(Row Level Security)를 켜고** 정책을 만든다 — anon key는 브라우저에 그대로 노출되므로, RLS 없이는 테이블 전체가 공개된 것과 같습니다
+4. 실제 데이터가 담긴 `.env.local` 은 절대 커밋하지 않는다 (`.gitignore` 처리돼 있습니다)
+
+## 배포
+
+정적 빌드라 어디에나 올릴 수 있지만, SPA 라우팅 때문에 주의할 점이 하나 있습니다. `/students/s03` 같은 주소로 **직접 접속하거나 새로고침**하면 호스트가 404를 낼 수 있습니다.
+
+- **Vercel** — `vercel.json` 의 rewrite 설정이 이미 들어 있어 그대로 배포하면 됩니다
+- **GitHub Pages** — rewrite를 지원하지 않으므로, `src/main.tsx` 의 `BrowserRouter` 를 `HashRouter` 로 바꾸거나 `404.html` 우회를 써야 합니다
+
+검색엔진 노출은 `index.html` 의 `noindex` 로 막아두었습니다.

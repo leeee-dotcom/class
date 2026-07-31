@@ -1,0 +1,19 @@
+/*
+ * Apple의 sub-nav는 반투명 + 블러다. 그 형태는 따르되 색은 따르지 않는다 —
+ * 이 줄은 장식이 아니라 경고이고, 배경에 녹아들면 제 일을 못 한다.
+ */
+.mock-banner {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: var(--space-sm) var(--space-lg);
+  background: rgba(255, 244, 214, 0.86);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid #a86b00;
+  color: #4d3200;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caption);
+  text-align: center;
+}

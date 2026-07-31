@@ -1,0 +1,32 @@
+.student-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* Apple의 primary pill 버튼 */
+.student-nav__link {
+  padding: 11px 22px;
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  color: var(--canvas);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking-caption);
+}
+
+.student-nav__link:hover {
+  text-decoration: none;
+}
+
+.student-nav__link--disabled {
+  background: transparent;
+  border: 1px solid var(--hairline);
+  color: var(--ink-48);
+}
+
+.student-nav__hint {
+  color: var(--ink-48);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+}

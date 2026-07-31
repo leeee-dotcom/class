@@ -1,0 +1,80 @@
+/*
+ * Apple 디자인 시스템 규칙을 따른다.
+ * - 강조색은 Action Blue 하나뿐. 보조 브랜드색을 두지 않는다
+ * - 카드에 그림자를 쓰지 않는다. 깊이는 1px 헤어라인과 여백으로 만든다
+ * - 굵기 사다리는 300/400/600/700. 500은 쓰지 않는다
+ * - 큰 글자에는 음수 자간을 준다
+ *
+ * 여기에 이 화면의 조건 하나가 더해진다: 전자칠판 한 화면에 들어가야 하므로
+ * 크기를 px로 고정하지 않고 화면 너비에 따라 자라게(clamp) 잡는다.
+ * 1920 화면에서 본문 17px, 4K 칠판에서는 그보다 크게 나온다.
+ */
+:root {
+  color-scheme: light;
+
+  --font-display: -apple-system, 'SF Pro Display', system-ui, 'Apple SD Gothic Neo',
+    'Malgun Gothic', sans-serif;
+  --font-body: -apple-system, 'SF Pro Text', system-ui, 'Apple SD Gothic Neo', 'Malgun Gothic',
+    sans-serif;
+
+  /* 글자 크기 — 1920 기준 본문 17px */
+  --fs-micro: clamp(0.72rem, 0.65vw, 1.15rem);
+  --fs-caption: clamp(0.85rem, 0.78vw, 1.35rem);
+  --fs-body: clamp(1rem, 0.9vw, 1.6rem);
+  --fs-num: clamp(1.05rem, 0.95vw, 1.7rem);
+  --fs-tagline: clamp(1.1rem, 1.05vw, 1.95rem);
+  --fs-display-md: clamp(1.3rem, 1.35vw, 2.5rem);
+  --fs-display-lg: clamp(1.6rem, 1.8vw, 3.4rem);
+  --fs-hero: clamp(1.9rem, 2.3vw, 4.2rem);
+
+  /* 자간 — Apple의 "tight" 감각 */
+  --tracking-display: -0.374px;
+  --tracking-caption: -0.224px;
+  --tracking-micro: -0.12px;
+
+  /* 표면 */
+  --canvas: #ffffff;
+  --parchment: #f5f5f7;
+  --pearl: #fafafc;
+
+  /* 글자 */
+  --ink: #1d1d1f;
+  --ink-80: #333333;
+  --ink-48: #6e6e73; /* 흰 바탕 대비 4.8:1 */
+
+  /* 선 */
+  --divider: #f0f0f0;
+  --hairline: #e0e0e0;
+  --hairline-soft: rgba(0, 0, 0, 0.08);
+
+  /* 강조 — 상호작용 요소는 전부 이 색 하나 */
+  --action: #0066cc;
+  --focus: #0071e3;
+
+  /*
+   * 성적 변화는 상태 표시이지 브랜드색이 아니다.
+   * 초록↔빨강은 적록색약에서 ΔE 4.5로 붙어버려 쓰지 않는다.
+   * Action Blue ↔ 주홍은 ΔE 26.4로 안전하다. ▲▼ 기호와 숫자를 함께 써서 색 없이도 읽히게 한다.
+   */
+  --up: #0066cc;
+  --down: #c02a1f;
+
+  /* 여백 — 8px 기준 */
+  --space-xxs: clamp(0.2rem, 0.22vw, 0.4rem);
+  --space-xs: clamp(0.4rem, 0.45vw, 0.8rem);
+  --space-sm: clamp(0.6rem, 0.65vw, 1.2rem);
+  --space-md: clamp(0.85rem, 0.9vw, 1.7rem);
+  --space-lg: clamp(1.15rem, 1.3vw, 2.4rem);
+  --space-xl: clamp(1.6rem, 1.8vw, 3.2rem);
+
+  /* 모서리 */
+  --radius-xs: 5px;
+  --radius-sm: 8px;
+  --radius-md: 11px;
+  --radius-lg: 18px;
+  --radius-pill: 9999px;
+
+  --sidebar-w: clamp(14rem, 15vw, 22rem);
+  --portrait-sm: clamp(30px, 2vw, 48px);
+  --portrait-lg: clamp(84px, 7.5vw, 160px);
+}

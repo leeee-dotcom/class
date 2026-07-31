@@ -1,0 +1,23 @@
+.avatar {
+  flex: none;
+  display: block;
+  border-radius: 50%;
+  background: var(--parchment);
+  object-fit: cover;
+}
+
+.avatar--sm {
+  width: var(--portrait-sm);
+  height: var(--portrait-sm);
+}
+
+.avatar--md {
+  width: calc(var(--portrait-lg) * 0.62);
+  height: calc(var(--portrait-lg) * 0.62);
+}
+
+.avatar--lg {
+  width: var(--portrait-lg);
+  height: var(--portrait-lg);
+  border: 1px solid var(--hairline);
+}

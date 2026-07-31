@@ -1,0 +1,87 @@
+.grade-table__scroll {
+  overflow-x: auto;
+}
+
+.grade-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+}
+
+.grade-table__caption {
+  text-align: left;
+  padding-bottom: var(--space-sm);
+  color: var(--ink-48);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+}
+
+.grade-table th,
+.grade-table td {
+  padding: var(--space-sm) var(--space-xs);
+  border-bottom: 1px solid var(--divider);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.grade-table thead th {
+  color: var(--ink-48);
+  font-size: var(--fs-caption);
+  font-weight: 400;
+  letter-spacing: var(--tracking-caption);
+}
+
+.grade-table tbody th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.grade-table tbody tr:last-child th,
+.grade-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.grade-score {
+  font-weight: 600;
+}
+
+.grade-level {
+  margin-left: 0.3rem;
+  color: var(--ink-48);
+  font-size: var(--fs-micro);
+}
+
+.grade-trend {
+  display: inline-block;
+  margin-left: var(--space-xs);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: var(--tracking-micro);
+}
+
+.grade-trend--up {
+  color: var(--up);
+}
+
+.grade-trend--down {
+  color: var(--down);
+}
+
+.grade-trend--same {
+  color: var(--ink-48);
+}
+
+/* 10점 이상 움직인 과목은 회의에서 놓치면 안 된다 */
+.grade-trend--major {
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--radius-pill);
+  color: var(--canvas);
+}
+
+.grade-trend--major.grade-trend--up {
+  background: var(--up);
+}
+
+.grade-trend--major.grade-trend--down {
+  background: var(--down);
+}

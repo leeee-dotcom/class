@@ -1,9 +1,64 @@
-:root {
-  font-family: system-ui, 'Segoe UI', 'Malgun Gothic', sans-serif;
-  line-height: 1.5;
-  color-scheme: light dark;
+@import './styles/tokens.css';
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: var(--tracking-display);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+a {
+  color: var(--action);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Apple 규칙: 누를 때 0.95로 줄어드는 것이 시스템 전체의 미세 반응 */
+a:active,
+button:active {
+  transform: scale(0.95);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  a:active,
+  button:active {
+    transform: none;
+  }
+}
+
+/* 숫자가 자리마다 흔들리지 않아야 표와 차트를 눈으로 비교할 수 있다 */
+table,
+.tabular {
+  font-variant-numeric: tabular-nums;
 }

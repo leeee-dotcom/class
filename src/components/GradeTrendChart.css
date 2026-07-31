@@ -1,0 +1,36 @@
+.trend-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.trend-chart__grid {
+  stroke: var(--divider);
+  stroke-width: 1;
+}
+
+.trend-chart__axis {
+  fill: var(--ink-48);
+  font-size: 11px;
+  font-family: var(--font-body);
+}
+
+.trend-chart__line {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 선이 겹치는 지점에서도 점이 구분되도록 표면색 링을 두른다 */
+.trend-chart__dot {
+  stroke: var(--canvas);
+  stroke-width: 2;
+}
+
+.trend-chart__label {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  letter-spacing: var(--tracking-micro);
+}

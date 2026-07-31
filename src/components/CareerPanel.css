@@ -1,0 +1,25 @@
+/*
+ * 진로 칸은 항목이 넷이라 라벨을 왼쪽 고정 폭에 세우고 본문 시작점을 한 줄로 맞춘다.
+ * 라벨을 위에 얹는 기본 배치보다 훑어 내려가기 쉽다.
+ */
+.career-panel .profile-field {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.career-panel .profile-field__body {
+  margin-top: 0;
+}
+
+@media (max-width: 780px) {
+  .career-panel .profile-field {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .career-panel .profile-field__body {
+    margin-top: var(--space-xxs);
+  }
+}
