@@ -17,6 +17,9 @@ dist-ssr
 .env.*
 !.env.example
 
+# 브라우저 확인용 디버그 출력
+.playwright-mcp
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

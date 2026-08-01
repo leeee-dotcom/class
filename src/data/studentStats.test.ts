@@ -8,8 +8,11 @@ import {
 } from './studentStats'
 import type { Student } from './types'
 
-function studentWith(first: number[], second: number[]): Student {
-  const subjects = ['국어', '영어', '수학']
+function studentWith(
+  first: number[],
+  second: number[],
+  subjects = ['국어', '영어', '수학'],
+): Student {
   const semester = (label: string, scores: number[]) => ({
     label,
     grades: subjects.map((subject, i) => ({
@@ -62,16 +65,28 @@ describe('studentStats', () => {
     expect(fallen).toEqual([])
   })
 
-  it('잘하는 과목을 점수가 높은 순으로 뽑는다', () => {
-    const result = strongSubjects(studentWith([70, 70, 70], [82, 95, 60]), 2)
+  /** 실제 화면과 같은 5과목 학생 */
+  const fiveSubjects = () =>
+    studentWith(
+      [70, 70, 70, 70, 70],
+      [96, 91, 61, 97, 70],
+      ['국어', '영어', '수학', '사회', '과학'],
+    )
 
-    expect(result.map((s) => s.subject)).toEqual(['영어', '국어'])
+  it('잘하는 과목을 점수가 높은 순으로 뽑는다', () => {
+    expect(strongSubjects(fiveSubjects()).map((s) => s.subject)).toEqual(['사회', '국어'])
   })
 
   it('약한 과목을 점수가 낮은 순으로 뽑는다', () => {
-    const result = weakSubjects(studentWith([70, 70, 70], [82, 95, 60]), 2)
+    expect(weakSubjects(fiveSubjects()).map((s) => s.subject)).toEqual(['수학', '과학'])
+  })
 
-    expect(result.map((s) => s.subject)).toEqual(['수학', '국어'])
+  it('한 과목이 잘하는 과목과 약한 과목에 동시에 들어가지 않는다', () => {
+    const student = fiveSubjects()
+    const strong = strongSubjects(student).map((s) => s.subject)
+    const weak = weakSubjects(student).map((s) => s.subject)
+
+    expect(strong.filter((subject) => weak.includes(subject))).toEqual([])
   })
 
   it('최근 학기의 성취도 A 과목 수를 센다', () => {

@@ -26,4 +26,14 @@ describe('HomePage', () => {
     expect(screen.getByText('평균이 오른 학생')).toBeInTheDocument()
     expect(screen.getByText('평균이 떨어진 학생')).toBeInTheDocument()
   })
+
+  it('기준 학기를 가장 최근 학기로 적는다', async () => {
+    render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>,
+    )
+
+    expect(await screen.findByText('3학년 1학기 기준')).toBeInTheDocument()
+  })
 })

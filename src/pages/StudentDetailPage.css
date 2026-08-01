@@ -157,7 +157,7 @@
 }
 
 /* 전자칠판 모드: 세 단이 화면 높이를 채우고, 넘치면 카드 안에서만 스크롤한다 */
-@media (min-width: 1200px) and (min-height: 680px) {
+@media (min-width: 1241px) and (min-height: 680px) {
   .detail {
     grid-template-rows: auto minmax(0, 1fr);
     height: 100%;
@@ -173,4 +173,73 @@
     grid-auto-rows: minmax(0, auto);
     min-height: 0;
   }
+
+  /*
+   * 머리말은 한 번 읽고 마는 정보라 눌러 두고, 아낀 세로를 성적 칸에 넘긴다.
+   * 이걸 하지 않으면 머리말이 화면 높이의 30~40%를 가져가 성적표가 한두 행만 보인다.
+   */
+  .detail__head {
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .detail__name {
+    font-size: var(--fs-display-md);
+  }
+
+  .detail__meta {
+    margin: var(--space-xxs) 0 var(--space-xs);
+  }
+
+  .detail__portrait .avatar--lg {
+    width: clamp(72px, 5vw, 112px);
+    height: clamp(72px, 5vw, 112px);
+  }
+
+  /*
+   * 성적 칸 안에서는 표가 차트보다 급하다. 차트는 추세만 보면 되므로 높이를 묶고,
+   * 남는 세로를 전부 표에 준다. 그래야 다섯 과목이 한눈에 들어온다.
+   */
+  .detail__column--grades {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .detail__column--grades .trend-chart svg {
+    width: auto;
+    max-width: 100%;
+    max-height: clamp(96px, 16vh, 240px);
+    margin-inline: auto;
+  }
+
+  /* 다섯 과목을 한 화면에 넣기 위해 행 간격만 좁힌다. 글자 크기는 건드리지 않는다. */
+  .detail__column--grades .grade-table th,
+  .detail__column--grades .grade-table td {
+    padding: var(--space-xs) var(--space-xs);
+  }
+
+  /*
+   * 카드 머리말이 같은 말을 이미 하고 있어 화면에서만 접는다.
+   * display:none 으로 지우면 스크린리더에서도 사라지므로 그렇게 하지 않는다.
+   */
+  .detail__column--grades .grade-table__caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }
+
+/*
+ * 성적 칸이 나머지 칸보다 세로를 더 가져간다. 차트와 성적표는 다른 카드보다
+ * 본래 높이가 크기 때문에, 행을 똑같이 나누면 성적 칸만 잘린다.
+ * 칸이 여러 줄로 접히는 폭에서만 의미가 있어 폭 구간별로 나눠 둔다.
+ */
+@media (min-width: 1241px) and (max-width: 1600px) and (min-height: 680px) {
+  .detail__columns {
+    grid-template-rows: minmax(0, 1.6fr) minmax(0, 1fr);
+  }
+}
+

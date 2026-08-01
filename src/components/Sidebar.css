@@ -55,6 +55,9 @@
 
 .sidebar__list {
   display: grid;
+  /* 전자칠판 모드에서 이 목록이 flex:1 로 늘어난다. 이 줄이 없으면 행이 세로로
+     늘어나 학생 사이가 한 뼘씩 벌어진다 */
+  align-content: start;
   gap: 2px;
   margin: 0;
   padding: 0;
@@ -115,7 +118,7 @@
 }
 
 /* 전자칠판 모드: 사이드바가 화면 높이를 채우고 명단만 안에서 스크롤한다 */
-@media (min-width: 1200px) and (min-height: 680px) {
+@media (min-width: 1241px) and (min-height: 680px) {
   .sidebar {
     height: 100%;
     min-height: 0;

@@ -38,14 +38,31 @@ export function subjectShifts(student: Student): { risen: SubjectShift[]; fallen
 
 export type SubjectScore = { subject: string; score: number; level: string }
 
+/*
+ * 잘하는 과목과 약한 과목은 서로 겹치면 안 된다.
+ * 5과목에서 위아래로 3개씩 뽑으면 가운데 과목이 양쪽에 다 들어가서
+ * "잘하면서 동시에 약한 과목"이 생긴다 — 회의에서 읽히지 않는 표시다.
+ * 그래서 뽑는 개수를 과목 수의 절반으로 묶는다. 5과목이면 위아래 2개씩이고
+ * 가운데 한 과목은 어느 쪽에도 넣지 않는다.
+ */
+function disjointCount(total: number, requested: number): number {
+  return Math.min(requested, Math.floor(total / 2))
+}
+
 /** 최근 학기 점수가 높은 순 상위 과목. 회의에서 "이 학생은 뭘 잘하나"에 답한다. */
 export function strongSubjects(student: Student, count = 3): SubjectScore[] {
-  return [...latestGrades(student)].sort((a, b) => b.score - a.score).slice(0, count)
+  const grades = latestGrades(student)
+  return [...grades]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, disjointCount(grades.length, count))
 }
 
 /** 최근 학기 점수가 낮은 순 하위 과목. */
 export function weakSubjects(student: Student, count = 3): SubjectScore[] {
-  return [...latestGrades(student)].sort((a, b) => a.score - b.score).slice(0, count)
+  const grades = latestGrades(student)
+  return [...grades]
+    .sort((a, b) => a.score - b.score)
+    .slice(0, disjointCount(grades.length, count))
 }
 
 export function countLevelA(student: Student): number {
@@ -62,6 +79,8 @@ export type ClassSummary = {
   average: number
   risen: number
   fallen: number
+  /** 이 숫자들이 어느 학기 기준인지. 학기가 늘어나면 따라 바뀐다 */
+  semester: string
 }
 
 /** 첫 화면에서 반 전체 상태를 한 줄로 알려주기 위한 값 */
@@ -80,5 +99,6 @@ export function classSummary(students: Student[]): ClassSummary {
     average: Math.round(overall),
     risen: averages.filter((entry) => entry.latest > entry.previous).length,
     fallen: averages.filter((entry) => entry.latest < entry.previous).length,
+    semester: students[0]?.semesters.at(-1)?.label ?? '',
   }
 }

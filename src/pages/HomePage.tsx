@@ -23,7 +23,8 @@ export function HomePage() {
     <div className="home">
       <MeetingGuide />
 
-      <Card title="반 전체" note="2학년 1학기 기준">
+      {/* 기준 학기는 데이터에서 읽는다. 적어두면 학기가 늘어날 때 따라오지 않는다 */}
+      <Card title="반 전체" note={summary ? `${summary.semester} 기준` : undefined}>
         {summary === null ? (
           <p className="home__status">불러오는 중입니다…</p>
         ) : (
